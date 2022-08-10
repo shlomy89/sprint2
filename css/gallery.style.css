@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+
+/* --------------------------------- Helpers -------------------------------- */
+/* FLEX */
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+}
+
+/* ------------------------------------ / ----------------------------------- */
+
+.gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(13em, 1fr));
+    gap: 1em;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.meme-editor-container > *  {
+    /* display: none; */
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-container {
+    /* display: none; */
+    display: block;
+    width: 100%;
+    height: 100%;
+}

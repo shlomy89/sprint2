@@ -1,0 +1,25 @@
+
+.meme-editor-container {
+    /* display: none; */
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #5a5a5a;
+}
+
+.canvas-container {
+    border-style: double;
+    border-radius: 10px;
+    flex-direction: column;
+    background-color: rgba(199, 228, 231, 0.66);
+    margin: auto;
+    margin-block-start: 50px;
+    width: 70vw;
+    height: 35vh;
+    margin-top: 25px;
+}
