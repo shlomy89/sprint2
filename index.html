@@ -15,19 +15,28 @@
     <main class="main-content">
 
         <header class="main-header">
-            <nav>
-
-            </nav>
+            <nav class="main-nav">
+                <ul class="main-nav-list flex clean-list align-center">
+                    <span class="header-logo flex">Logo</span>
+                    <li><a  class="btn gallery-btn" href="#" onclick="">Gallery</a></li>
+                    <li><a  class="btn memes-btn" href="#" onclick="">Memes</a></li>
+                    <li><a  class="btn about-btn" href="#" onclick="">About</a></li>
+                </ul>
         </header>
-        <section class="gallery-container">
+
+        <section class="gallery-container flex align-center">
+
+            <div class="filter flex align-center">
+                <input class="search-input" oninput="setSearch(this.value)" type="text" placeholder="Serarch">
+            </div>
+
             <div class="gallery-grid grid">
-                <!-- <div class="img img1"><img src="img/meme-imgs(square)/1.jpg"></div> -->
                 <!-- Populated from JS -->
             </div>
         </section>
 
-        <section class="meme-editor-container grid">
 
+        <section class="meme-editor-container grid">
             <div class="canvas-container">
                 <canvas class="meme-canvas" height="350" width="350">
                     <!-- Populated from JS -->

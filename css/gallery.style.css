@@ -22,24 +22,34 @@
     display: grid;
 }
 
+.clean-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
 /* ------------------------------------ / ----------------------------------- */
+
+body {
+    background-color: #22252c;
+    font-family: sans-serif;
+}
 
 .gallery-grid {
     grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(13em, 1fr));
-    gap: 1em;
+    gap: 1.3em;
 }
 
 img {
     width: 100%;
     height: 100%;
+    border-radius: 10px;
 }
 
-.meme-editor-container > *  {
-    /* display: none; */
-    display: block;
-    width: 100%;
-    height: 100%;
+img:hover {
+    box-shadow: 4px 4px 8px 2px rgb(255 255 255 / 79%);
+
 }
 
 .gallery-container {
@@ -47,4 +57,72 @@ img {
     display: block;
     width: 100%;
     height: 100%;
+}
+
+.main-nav-list {
+    width: 100%;
+    height: 80px;
+    border-radius: 50px;
+    margin-block-start: 20px;
+    margin-block-end: 20px;
+    border: none;
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    color: #ffffff;
+    font-size: 2em;
+    justify-content: flex-end;
+}
+
+.main-nav-list .btn:hover {
+    box-shadow: 3px 4px 0px 0px #899599;
+    /* background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%); */
+    background-color: #fefefe;
+    border-radius: 30px;
+    border: 1px solid #d6bcd6;
+    display: inline-block;
+    cursor: pointer;
+    color: #21ac91;
+    font-family: sans-serif;
+    font-size: 30px;
+    padding: 7px 25px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #e1e2ed;
+}
+
+.main-nav-list .btn:active {
+    position: relative;
+    top: 1px;
+}
+
+
+.main-nav-list> :last-child {
+    margin-inline-end: 85px;
+}
+
+.main-header .main-nav-list a {
+    color: inherit;
+    text-decoration: none;
+    margin-inline-start: 85px;
+}
+
+.header-logo {
+    margin-inline-end: 1000px;
+}
+
+.filter {
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+.search-input {
+    padding: 6px;
+    font-size: 25px;
+    border-width: 1px;
+    border-color: #cccccc;
+    background-color: #2d2d2d;
+    color: rgba(255, 255, 255, 0.689);
+    border-style: hidden;
+    margin-inline-start: 50px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, .61);
+    text-shadow: 0px 0px 5px rgba(66, 66, 66, .75);
 }

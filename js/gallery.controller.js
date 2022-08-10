@@ -21,8 +21,5 @@ document.querySelector('.gallery-grid').innerHTML = strHTML.join('')
 }
 
 function onImgSelect(imgId) {
-    
-    console.log('imgId:', imgId);
-    //call the memeService's setImg()
-    //and then renderMeme()
+    setImg(imgId)
 }

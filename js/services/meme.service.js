@@ -35,7 +35,6 @@ var gMeme = {
     ]
 }
 
-
 function getMeme() {
     const {lines} = gMeme
     var meme = {
@@ -55,6 +54,7 @@ function setLineTxt(lineTxt) {
     renderMeme()
 }
 
-function setImg() {
-
+function setImg(imgId) {
+    gMeme.selectedImgId = imgId
+    renderMeme()
 }
