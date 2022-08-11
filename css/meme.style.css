@@ -1,25 +1,86 @@
-
 .meme-editor-container {
-    display: none;
-    /* display: block; */
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(13em, 1fr));
     width: 100%;
     height: 100%;
 }
 
-canvas {
+.meme-canvas {
+
+    width: 90%;
+    height: 90%;
     display: block;
-    margin: 0 auto;
+    border-radius: 30px;
     background-color: #5a5a5a;
 }
 
-/* .canvas-container { */
-    /* border-style: double; */
-    /* border-radius: 10px; */
-    /* flex-direction: column; */
-    /* background-color: rgba(199, 228, 231, 0.66); */
-    /* margin: auto; */
-    /* margin-block-start: 50px; */
-    /* width: 70vw; */
-    /* height: 35vh; */
-    /* margin-top: 25px; */
-/* } */
+.control-box {
+    height: 90%;
+    width: 90%;
+    border-radius: 30px;
+    border: 1px solid #ffffff;
+    background-color: #2d2d2d5b;
+}
+
+.control-box {
+    justify-items: center;
+    align-content: space-around;
+}
+
+/* .line-input {} */
+
+/* .line-edit {} */
+
+.editor-btn {
+    margin-inline-end: 15px;
+    border: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    height: 50px;
+    width: 50px;
+}
+
+.txt-edit-btn {
+    width: 80%;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 15px;
+    background-color: #33b88ed1;
+    padding-inline-start: 15px;
+    padding-inline-end: 5px;
+    padding-block-start: 15px;
+    padding-block-end: 15px;
+    border-radius: 10px;
+}
+
+
+.select-font {
+    grid-column: 1/4;
+    margin-inline-end: 10px;
+    border: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.emojies {
+background-color: #ffffff;
+border-radius: 30px;
+width: 400px;
+}
+
+
+/* .share {} */
+
+.share-btn {
+    height: 40px;
+    width: 200px;
+}
+
+.download-btn {
+    justify-content: space-between;
+    height: 40px;
+    width: 200px;
+    margin-inline-end: 0;
+}

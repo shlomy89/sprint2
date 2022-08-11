@@ -15,13 +15,30 @@
     <main class="main-content">
 
         <header class="main-header">
-            <nav class="main-nav">
-                <ul class="main-nav-list flex clean-list align-center">
-                    <span class="header-logo flex">Logo</span>
-                    <li><a  class="btn gallery-btn" href="#" onclick="">Gallery</a></li>
-                    <li><a  class="btn memes-btn" href="#" onclick="">Memes</a></li>
-                    <li><a  class="btn about-btn" href="#" onclick="">About</a></li>
-                </ul>
+
+            <nav class="main-nav-list flex clean-list align-center">
+
+                <div class="header-logo flex">
+                    <span>Logo</span>
+                </div>
+
+                <div class="header-btn flex">
+
+                    <div class="btn gallery-btn">
+                        <a href="#" onclick="">Gallery</a>
+                    </div>
+
+                    <div class="btn memes-btn">
+                        <a href="#" onclick="">Memes</a>
+                    </div>
+
+                    <div class="btn about-btn">
+                        <a href="#" onclick="">About</a>
+                    </div>
+
+                </div>
+            </nav>
+
         </header>
 
         <section class="gallery-container flex align-center">
@@ -36,13 +53,53 @@
         </section>
 
 
-        <section class="meme-editor-container grid">
-            <div class="canvas-container">
-                <canvas class="meme-canvas" height="350" width="350">
-                    <!-- Populated from JS -->
-                </canvas>
-                <input oninput="setLineTxt(this.value)" type="text" placeholder="">
-            </div>
+        <section class="meme-editor-container hide1 grid">
+
+            <canvas class="meme-canvas" height="350" width="350">
+                <!-- Populated from JS -->
+            </canvas>
+
+            <section class="control-box grid">
+
+                <div class="line-input">
+                    <input oninput="onSetLineTxt(this.value)" type="text" placeholder="">
+                </div>
+
+                <div class="line-edit flex">
+                    <button class="editor-btn swich-lines" onclick="">swich</button>
+                    <button class="editor-btn add-line" onclick="">add</button>
+                    <button class="editor-btn remove-line" onclick="">remove</button>
+                </div>
+
+                <div class="txt-edit-btn grid">
+                    <button class="editor-btn increase-font" onclick="onChangeTxtSize(3)">increase</button>
+                    <button class="editor-btn decrease-font" onclick="onChangeTxtSize(-3)">decrease</button>
+                    <button class="editor-btn aline-left" onclick="onChangeAlign('right')">aline-left</button>
+                    <button class="editor-btn aline-center" onclick="onChangeAlign('center')">aline-center</button>
+                    <button class="editor-btn aline-right" onclick="onChangeAlign('left')">aline-right</button>
+
+                    <select class="select-font" oninput="onSetTxtFont(this.value)">
+                        <option>IMPACT</option>
+                        <option>serif</option>
+                        <option>DAVID</option>
+                    </select>
+
+                    <button class="editor-btn font-weight" onclick="">font-weight</button>
+                    <input type="color" class="editor-btn font-color" oninput="onSetTxtColor(this.value)">font-color</input type="color">
+                </div>
+
+                <div class="emojies flex">
+                    <p>😎😎😎😎😎😎</p>
+                </div>
+
+                <div class="share flex">
+                    <button class="editor-btn share-btn" onclick="">Share</button>
+                    <button class="editor-btn download-btn" onclick="">Download</button>
+                </div>
+
+
+            </section>
+
         </section>
     </main>
 
@@ -51,7 +108,7 @@
     <script src="js/services/galerry.service.js"></script>
     <script src="js/meme.controller.js"></script>
     <script src="js/services/meme.service.js"></script>
-    <script src="js/services/upload.service.js"></script>
+    <script src="js/services/share.service.js"></script>
 </body>
 
 </html>

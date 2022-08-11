@@ -23,38 +23,60 @@ var gImgs = [
 ]
 
 var gMeme = {
-    selectedImgId: 2,
+    selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I sometimes eat Falafel',//setLineTxt()
+            txt: '',//setLineTxt()
             size: 30,
-            align: 'left',
-            color: 'red'
+            align: 'center',
+            color: 'blue',
+            font: 'impact'
         }
     ]
 }
 
 function getMeme() {
-    const {lines} = gMeme
+    const { lines } = gMeme
     var meme = {
         img: gImgs[gMeme.selectedImgId - 1].url,
         lineIdx: gMeme.selectedLineIdx,
         txt: lines[gMeme.selectedLineIdx].txt,
         size: lines[gMeme.selectedLineIdx].size,
         align: lines[gMeme.selectedLineIdx].align,
-        color: lines[gMeme.selectedLineIdx].color
+        color: lines[gMeme.selectedLineIdx].color,
+        font: lines[gMeme.selectedLineIdx].font
     }
     return meme
 }
 
-function setLineTxt(lineTxt) {
-    const {lines} = gMeme
-    lines[gMeme.selectedLineIdx].txt = lineTxt
-    renderMeme()
+function setLineTxt(memeLineTxt) {
+    const { lines } = gMeme
+    lines[gMeme.selectedLineIdx].txt = memeLineTxt
 }
+
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
+    var elGallery = document.querySelector('.gallery-container')
+    elGallery.style.display = "none"
+    var elMemeEditor = document.querySelector('.meme-editor-container')
+    elMemeEditor.classList.remove('hide')
     renderMeme()
+}
+
+ function setTxtColor(txtColor) {
+    gMeme.lines[gMeme.selectedLineIdx].color = txtColor
+}
+
+//  function setTxtFont(txtFont) {
+//     gMeme.lines[gMeme.selectedLineIdx].color = txtFont
+//  }
+
+function changeTxtSize(integer) {
+    gMeme.lines[gMeme.selectedLineIdx].size += integer
+}
+
+function changeAlign(direction) {
+    gMeme.lines[gMeme.selectedLineIdx].align = direction
 }
