@@ -1,5 +1,9 @@
 
-var gCanvasColor = '#ffffff'
+const gCanvasColor = '#ffffff'
+const STORAGE_KEY = 'memesDB'
+var gSavedMemes = []
+
+// var gElInputLine = document.querySelector('.line-input input').value
 
 var gImgs = [
     { id: 1, url: 'img/meme-imgs(square)/1.jpg', keywords: ['funny', 'cat'] },
@@ -22,16 +26,20 @@ var gImgs = [
     { id: 18, url: 'img/meme-imgs(square)/18.jpg', keywords: ['funny', 'cat'] }
 ]
 
+
 var gMeme = {
-    selectedImgId: 1,
+    selectedImgId: 2,
     selectedLineIdx: 0,
     lines: [
         {
-            txt: '',//setLineTxt()
+            txt: '',
             size: 30,
             align: 'center',
             color: 'blue',
-            font: 'impact'
+            font: 'impact',
+            stroke: 'red',
+            linePosX: 175,
+            linePosY: 30
         }
     ]
 }
@@ -45,16 +53,34 @@ function getMeme() {
         size: lines[gMeme.selectedLineIdx].size,
         align: lines[gMeme.selectedLineIdx].align,
         color: lines[gMeme.selectedLineIdx].color,
-        font: lines[gMeme.selectedLineIdx].font
+        font: lines[gMeme.selectedLineIdx].font,
+        stroke: lines[gMeme.selectedLineIdx].stroke,
+        linePosX: lines[gMeme.selectedLineIdx].linePosX,
+        linePosY: lines[gMeme.selectedLineIdx].linePosY
     }
     return meme
+}
+
+function cleargMeme() {
+        gMeme.selectedImgId = 2
+        gMeme.selectedLineIdx = 0
+    for (let i = 0; i < gMeme.lines.length; i++) {
+        gMeme.selectedLineIdx = i
+        gMeme.lines[i].txt= ''
+        gMeme.lines[i].size = 30
+        gMeme.lines[i].align = 'center'
+        gMeme.lines[i].color = 'blue'
+        gMeme.lines[i].font = 'impact'
+        gMeme.lines[i].stroke = 'red'
+        gMeme.lines[i].linePosX = '175'
+        gMeme.lines[i].linePosY = '30'
+    }
 }
 
 function setLineTxt(memeLineTxt) {
     const { lines } = gMeme
     lines[gMeme.selectedLineIdx].txt = memeLineTxt
 }
-
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
@@ -65,18 +91,100 @@ function setImg(imgId) {
     renderMeme()
 }
 
- function setTxtColor(txtColor) {
+function setFontColor(txtColor) {
     gMeme.lines[gMeme.selectedLineIdx].color = txtColor
 }
 
-//  function setTxtFont(txtFont) {
-//     gMeme.lines[gMeme.selectedLineIdx].color = txtFont
-//  }
+function setStrokeColor(strokeColor) {
+    gMeme.lines[gMeme.selectedLineIdx].stroke = strokeColor
+}
+
+function setTxtFont(txtFont) {
+    gMeme.lines[gMeme.selectedLineIdx].font = txtFont
+}
 
 function changeTxtSize(integer) {
     gMeme.lines[gMeme.selectedLineIdx].size += integer
 }
 
-function changeAlign(direction) {
-    gMeme.lines[gMeme.selectedLineIdx].align = direction
+function changeAlign(alignDirection) {
+    gMeme.lines[gMeme.selectedLineIdx].align = alignDirection
+}
+
+function downloadMeme(elLink) {
+    const data = gElCanvas.toDataURL()
+    elLink.href = data
+    elLink.download = 'my-meme'
+}
+
+function moveLine(y) {
+    const { lines } = gMeme
+    // console.log('x, y:', x, y);
+
+    // if (!x) {
+    lines[gMeme.selectedLineIdx].linePosY += y
+    // x = lines[gMeme.selectedLineIdx].linePosX
+    // }
+    // if (!y) {
+    // lines[gMeme.selectedLineIdx].linePosX += x
+    // y = lines[gMeme.selectedLineIdx].linePosY
+    // }
+}
+
+function addLine() {
+    if (document.querySelector('.line-input input').value === '') return
+    const newLine = {
+        txt: '',
+        size: 30,
+        align: 'center',
+        color: 'blue',
+        font: 'impact',
+        stroke: 'red',
+        linePosX: 175,
+        linePosY: 320
+    }
+    gMeme.selectedLineIdx = gMeme.lines.length
+    gMeme.lines.push(newLine)
+    document.querySelector('.line-input input').value = ''
+}
+
+function removeLine() {
+    const { lines } = gMeme
+    if (gMeme.lines.length === 1) {
+        document.querySelector('.line-input input').value = ''
+        lines[gMeme.selectedLineIdx].txt = ''
+        return
+    }
+    lines.splice(-1)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+var switchLineDirection = 'down'
+
+function switchLine() {
+    var curLineTxt = gMeme.lines[gMeme.selectedLineIdx].txt
+    if (gMeme.lines.length < 2) return
+
+    if (gMeme.selectedLineIdx > 0 && switchLineDirection === 'down') {
+        gMeme.selectedLineIdx--
+        document.querySelector('.line-input input').value = curLineTxt
+
+    } else if (gMeme.selectedLineIdx === 0 || switchLineDirection === 'up') {
+        switchLineDirection = 'up'
+        gMeme.selectedLineIdx++
+        document.querySelector('.line-input input').value = curLineTxt
+
+        if (gMeme.selectedLineIdx === gMeme.lines.length - 1) {
+            switchLineDirection = 'down'
+        }
+    }
+}
+
+
+function _saveToStorage() {
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+}
+
+function _loadFromStorage() {
+    loadFromStorage(STORAGE_KEY)
 }

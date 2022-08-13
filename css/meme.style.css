@@ -1,3 +1,17 @@
+
+/* @font-face { */
+    /* font-family: fa; */
+    /* src: url(fontAwesome/fa-regular-400.ttf); */
+/* } */
+
+/* .fa { */
+    /* font-family: fa; */
+/* } */
+
+/* .fa.fa-arrow-up-arrow-down::before { */
+    /* content: '\f883'; */
+/* } */
+
 .meme-editor-container {
     align-items: center;
     justify-items: center;
@@ -29,35 +43,42 @@
     align-content: space-around;
 }
 
-/* .line-input {} */
-
-/* .line-edit {} */
-
 .editor-btn {
-    margin-inline-end: 15px;
+    margin-inline-end: 8px;
     border: #ffffff;
     border-radius: 5px;
     font-weight: bold;
     height: 50px;
     width: 50px;
+    background-color: #6e6666;
+}
+
+.editor-btn img {
+    width: 100%;
+    height: 80%;
+    margin-top: 3px;
 }
 
 .txt-edit-btn {
-    width: 80%;
+    width: 60%;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    row-gap: 15px;
-    background-color: #33b88ed1;
+    row-gap: 25px;
+    background: radial-gradient(circle, rgba(51, 190, 109, 1) 0%, rgba(12, 152, 185, 1) 100%);
+    padding-inline-end: 15px;
     padding-inline-start: 15px;
-    padding-inline-end: 5px;
     padding-block-start: 15px;
     padding-block-end: 15px;
     border-radius: 10px;
 }
 
+.txt-edit-btn .editor-btn {
+    margin: auto;
+}
 
 .select-font {
     grid-column: 1/4;
+    margin-inline-start: 10px;
     margin-inline-end: 10px;
     border: #ffffff;
     border-radius: 5px;
@@ -65,22 +86,72 @@
 }
 
 .emojies {
-background-color: #ffffff;
-border-radius: 30px;
-width: 400px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    width: 400px;
 }
 
-
-/* .share {} */
-
-.share-btn {
-    height: 40px;
-    width: 200px;
-}
-
-.download-btn {
-    justify-content: space-between;
-    height: 40px;
-    width: 200px;
+.align-right {
     margin-inline-end: 0;
+}
+
+.font-color {
+    margin-inline-end: 0;
+}
+
+.share-btn,
+a.download-btn {
+    background: linear-gradient(#15d798, #073763);
+    border-radius: 10px;
+    color: #ffffff;
+    display: inline-block;
+    font: normal bold 26px/1 "Open Sans", sans-serif;
+    text-align: center;
+    height: 40px;
+    width: 200px;
+}
+
+a.download-btn {
+    margin-inline-end: 0;
+    text-decoration: none;
+    padding-top: 7px;
+}
+
+.line-input input {
+    padding: 10px;
+    font-size: 25px;
+    border-width: 1px;
+    border-color: #cccccc;
+    background-color: #f0eaea;
+    color: rgba(35, 34, 34, 0.903);
+    border-style: hidden;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgb(9, 224, 9);
+}
+
+.line-edit .editor-btn {
+    margin-inline-end: 13px;
+}
+
+.remove-line {
+    margin-inline-end: 0 !important;
+}
+
+
+/* ------------------------------------ / ----------------------------------- */
+
+.main-nav-list:first-child:hover .dropdowm-menu {
+    display: flex;
+}
+
+.dropdowm-menu li a {
+    border-bottom: 1px solid #1d1d1d;
+}
+.dropdowm-menu {
+    display: none;
+    position: fixed;
+    left: 0;
+    background-color: var(--color1);
+    width: 100%;
+    top: 8rem;
 }

@@ -5,20 +5,35 @@ function renderCanvas() {
 }
 
 function renderMeme() {
-    var meme = getMeme()
     //render img
     var img = new Image()
-    img.src = meme.img
+    img.src = gImgs[gMeme.selectedImgId - 1].url
 
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-
+        const oldLineIdx = gMeme.selectedLineIdx
+        
         //render txt
-        gCtx.textAlign = meme.align;
-        gCtx.font = `${meme.size}px ${meme.font}`;
-        gCtx.fillStyle = meme.color;
-        gCtx.fillText(meme.txt, gElCanvas.width / 2, 30);
+        for (let i = 0; i < gMeme.lines.length; i++) {
+            gMeme.selectedLineIdx = i
+            drawText()
+        }
+        gMeme.selectedLineIdx = oldLineIdx
     }
+}
+
+function drawText() {
+    var meme = getMeme()
+    gCtx.beginPath()
+    gCtx.textBaseline = 'middle'
+    gCtx.textAlign = meme.align
+    gCtx.font = `${meme.size}px ${meme.font}`
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = meme.stroke
+    gCtx.strokeText(meme.txt, meme.linePosX, meme.linePosY)
+    gCtx.fillStyle = meme.color
+    gCtx.fillText(meme.txt, meme.linePosX, meme.linePosY)
+    gCtx.closePath()
 }
 
 function onSetLineTxt(lineTxt) {
@@ -26,13 +41,18 @@ function onSetLineTxt(lineTxt) {
     renderMeme()
 }
 
-function onSetTxtColor(txtColor) {
-    setTxtColor(txtColor)
+function onSetFontColor(txtColor) {
+    setFontColor(txtColor)
     renderMeme()
 }
 
-function onChangeTxtSize(increase) {
-    changeTxtSize(increase)
+function onSetStrokeColor(strokeColor) {
+    setStrokeColor(strokeColor)
+    renderMeme()
+}
+
+function onChangeTxtSize(integer) {
+    changeTxtSize(integer)
     renderMeme()
 }
 
@@ -42,7 +62,26 @@ function onChangeAlign(alignDirection) {
 }
 
 
-// function onSetTxtFont(txtFont) {
-//     setTxtFont(txtFont)
-//     renderMeme()
-// }
+function onSetTxtFont(txtFont) {
+    setTxtFont(txtFont)
+    renderMeme()
+}
+
+function onAddLine() {
+    addLine()
+    renderMeme()
+}
+
+function onMoveLine(integer) {
+    moveLine(integer)
+    renderMeme()
+}
+
+function onRemoveLine() {
+    removeLine()
+    renderMeme()
+}
+
+function onSwitchLine() {
+    switchLine()
+}

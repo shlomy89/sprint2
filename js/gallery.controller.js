@@ -1,5 +1,4 @@
 
-
 var gElCanvas
 var gCtx
 
@@ -9,7 +8,6 @@ function onInit() {
     gCtx = gElCanvas.getContext('2d')
     renderGallery()
     renderCanvas()
-    renderMeme()
 }
 
 function renderGallery() {
@@ -24,4 +22,9 @@ document.querySelector('.gallery-grid').innerHTML = strHTML.join('')
 
 function onImgSelect(imgId) {
     setImg(imgId)
+}
+
+function onBackToGallery() {
+    backToGallery()
+    renderMeme()
 }

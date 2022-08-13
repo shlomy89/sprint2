@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
+    <link rel="stylesheet" href="css/header.style.css">
     <link rel="stylesheet" href="css/gallery.style.css">
     <link rel="stylesheet" href="css/meme.style.css">
 </head>
@@ -25,15 +26,15 @@
                 <div class="header-btn flex">
 
                     <div class="btn gallery-btn">
-                        <a href="#" onclick="">Gallery</a>
+                        <button onclick="onBackToGallery()">Gallery</button>
                     </div>
 
                     <div class="btn memes-btn">
-                        <a href="#" onclick="">Memes</a>
+                        <button onclick="">Memes</button>
                     </div>
 
                     <div class="btn about-btn">
-                        <a href="#" onclick="">About</a>
+                        <button onclick="">About</button>
                     </div>
 
                 </div>
@@ -43,7 +44,7 @@
 
         <section class="gallery-container flex align-center">
 
-            <div class="filter flex align-center">
+            <div class="filter-container flex align-center">
                 <input class="search-input" oninput="setSearch(this.value)" type="text" placeholder="Serarch">
             </div>
 
@@ -52,6 +53,11 @@
             </div>
         </section>
 
+        <section class="saved-memes hide">
+            <div class="mimes-grid grid">
+                <!-- Populated from JS -->
+            </div>
+        </section>
 
         <section class="meme-editor-container hide grid">
 
@@ -62,30 +68,41 @@
             <section class="control-box grid">
 
                 <div class="line-input">
-                    <input oninput="onSetLineTxt(this.value)" type="text" placeholder="">
+                    <input oninput="onSetLineTxt(this.value)" type="text" placeholder="Put your text here...">
                 </div>
 
                 <div class="line-edit flex">
-                    <button class="editor-btn swich-lines" onclick="">swich</button>
-                    <button class="editor-btn add-line" onclick="">add</button>
-                    <button class="editor-btn remove-line" onclick="">remove</button>
+                    <button class="editor-btn move-line-up" onclick="onMoveLine(-15)">up</button>
+                    <button class="editor-btn move-line-down" onclick="onMoveLine(15)">down</button>
+                    <button class="editor-btn move-line-down" onclick="onMoveLine(-15, 0)">Left</button>
+                    <button class="editor-btn move-line-down" onclick="onMoveLine(15, 0)">Right</button>
+                    <button class="editor-btn swich-lines" onclick="onSwitchLine()"><img
+                            src="img/btn-img/swich.png" /></button>
+                    <button class="editor-btn add-line" onclick="onAddLine()"><img src="img/btn-img/add.jpg" /></button>
+                    <button class="editor-btn remove-line" onclick="onRemoveLine()"><img
+                            src="img/btn-img/remove.jpg" /></button>
                 </div>
 
                 <div class="txt-edit-btn grid">
-                    <button class="editor-btn increase-font" onclick="onChangeTxtSize(3)">increase</button>
-                    <button class="editor-btn decrease-font" onclick="onChangeTxtSize(-3)">decrease</button>
-                    <button class="editor-btn aline-left" onclick="onChangeAlign('right')">aline-left</button>
-                    <button class="editor-btn aline-center" onclick="onChangeAlign('center')">aline-center</button>
-                    <button class="editor-btn aline-right" onclick="onChangeAlign('left')">aline-right</button>
+                    <button class="editor-btn increase-font" onclick="onChangeTxtSize(3)"><img
+                            src="img/btn-img/increase.jpg" /></button>
+                    <button class="editor-btn decrease-font" onclick="onChangeTxtSize(-3)"><img
+                            src="img/btn-img/decrease.jpg" /></button>
+                    <button class="editor-btn align-left" onclick="onChangeAlign('right')"><img
+                            src="img/btn-img/alignLeft.jpg" /></button>
+                    <button class="editor-btn align-center" onclick="onChangeAlign('center')"><img
+                            src="img/btn-img/alignCenter.jpg" /></button>
+                    <button class="editor-btn align-right" onclick="onChangeAlign('left')"><img
+                            src="img/btn-img/alignRight.jpg" /></button>
 
                     <select class="select-font" oninput="onSetTxtFont(this.value)">
                         <option>IMPACT</option>
-                        <option>serif</option>
+                        <option>SERIF</option>
                         <option>DAVID</option>
                     </select>
 
-                    <button class="editor-btn font-weight" onclick="">font-weight</button>
-                    <input type="color" class="editor-btn font-color" oninput="onSetTxtColor(this.value)">font-color</input type="color">
+                    <input type="color" class="editor-btn stroke-color" oninput="onSetStrokeColor(this.value)" />
+                    <input type="color" class="editor-btn font-color" oninput="onSetFontColor(this.value)" />
                 </div>
 
                 <div class="emojies flex">
@@ -93,22 +110,34 @@
                 </div>
 
                 <div class="share flex">
-                    <button class="editor-btn share-btn" onclick="">Share</button>
-                    <button class="editor-btn download-btn" onclick="">Download</button>
+                    <!-- <ul class="dropdowm-menu clean-list flex flex-direction-column"> -->
+                    <!-- <li><a class="flex align-center justify-center" href="#">October 2016</a></li> -->
+                    <!-- <li><a class="flex align-center justify-center" href="#">January 2017</a></li> -->
+                    <!-- <li><a class="flex align-center justify-center" href="#">April 2017</a></li> -->
+                    <!-- <li><a class="flex align-center justify-center" href="#">July 2017</a></li> -->
+                    <!-- </ul> -->
+                    <button class="editor-btn share-btn" onclick="onSaveMeme()">Share</button>
+                    <a class="editor-btn download-btn" href="#" onclick="downloadMeme(this)"
+                        download="cool-meme">Download</a>
                 </div>
 
 
             </section>
 
         </section>
+
+        <div class="share-container"></div>
+        <p class="user-msg"></p>
+
     </main>
 
-
-    <script src="js/gallery.controller.js"></script>
     <script src="js/services/galerry.service.js"></script>
-    <script src="js/meme.controller.js"></script>
     <script src="js/services/meme.service.js"></script>
     <script src="js/services/share.service.js"></script>
-</body>
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/savedMeme.controller.js"></script>
+    <script src="js/gallery.controller.js"></script>
+    <script src="js/meme.controller.js"></script>
 
+</body>
 </html>
