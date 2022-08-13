@@ -120,7 +120,7 @@ function addLine() {
         font: 'impact',
         stroke: 'red',
         linePosX: 175,
-        linePosY: 320
+        linePosY: gMeme.lines.length > 1 ? 175 : 330
     }
     gMeme.selectedLineIdx = gMeme.lines.length
     gMeme.lines.push(newLine)
