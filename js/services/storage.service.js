@@ -1,10 +1,16 @@
-
-
-function saveToStorage(key, val) {
-    localStorage.setItem(key, JSON.stringify(val))
+function saveToStorage(key, val, isJSON) {
+    if (isJSON) {
+        val = JSON.stringify(val)    
+    }
+    localStorage.setItem(key, val)
 }
 
-function loadFromStorage(key) {
+function loadFromStorage(key, isJSON) {
     var val = localStorage.getItem(key)
-    return JSON.parse(val)
+
+    if (isJSON) {
+        val = JSON.parse(val)
+    }
+
+    return val
 }

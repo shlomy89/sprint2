@@ -4,82 +4,90 @@ function renderCanvas() {
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function renderMeme() {
+function renderMeme(meme, elCanvas) {
+    let ctx = elCanvas.getContext('2d')
+    // ctx.globalCompositeOperation = 'source-over'
+
     //render img
     var img = new Image()
-    img.src = gImgs[gMeme.selectedImgId - 1].url
+    img.src = gImgs[meme.selectedImgId - 1].url
 
     img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        const oldLineIdx = gMeme.selectedLineIdx
-        
+        ctx.drawImage(img, 0, 0, elCanvas.width, elCanvas.height)
+        const oldLineIdx = meme.selectedLineIdx
+
         //render txt
-        for (let i = 0; i < gMeme.lines.length; i++) {
-            gMeme.selectedLineIdx = i
-            drawText()
+        for (let i = 0; i < meme.lines.length; i++) {
+            meme.selectedLineIdx = i
+            drawText(meme.lines[i], elCanvas.getContext('2d'))
         }
-        gMeme.selectedLineIdx = oldLineIdx
+        meme.selectedLineIdx = oldLineIdx
     }
 }
 
-function drawText() {
-    var meme = getMeme()
-    gCtx.beginPath()
-    gCtx.textBaseline = 'middle'
-    gCtx.textAlign = meme.align
-    gCtx.font = `${meme.size}px ${meme.font}`
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = meme.stroke
-    gCtx.strokeText(meme.txt, meme.linePosX, meme.linePosY)
-    gCtx.fillStyle = meme.color
-    gCtx.fillText(meme.txt, meme.linePosX, meme.linePosY)
-    gCtx.closePath()
+function drawText(line, ctx) {
+    var linePosX = line.linePosX
+    if (line.align === 'left') {
+        linePosX = 0
+    } else if (line.align === 'right') {
+        linePosX = 350
+    }
+    
+    ctx.beginPath()
+    ctx.textAlign = line.align
+    ctx.font = `${line.size}px ${line.font}`
+    ctx.lineWidth = 1
+    ctx.strokeStyle = line.stroke
+    ctx.strokeText(line.txt, linePosX, line.linePosY)
+    ctx.fillStyle = line.color
+    ctx.fillText(line.txt, linePosX, line.linePosY)
+    ctx.closePath()
 }
 
 function onSetLineTxt(lineTxt) {
     setLineTxt(lineTxt)
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function onSetFontColor(txtColor) {
     setFontColor(txtColor)
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function onSetStrokeColor(strokeColor) {
     setStrokeColor(strokeColor)
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function onChangeTxtSize(integer) {
     changeTxtSize(integer)
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function onChangeAlign(alignDirection) {
     changeAlign(alignDirection)
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
 }
-
 
 function onSetTxtFont(txtFont) {
     setTxtFont(txtFont)
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function onAddLine() {
     addLine()
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
+    document.querySelector('.line-input input').focus()
 }
 
-function onMoveLine(integer) {
-    moveLine(integer)
-    renderMeme()
+function onMoveLine(x, y) {
+    moveLine(x, y)
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function onRemoveLine() {
     removeLine()
-    renderMeme()
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function onSwitchLine() {

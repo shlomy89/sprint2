@@ -1,16 +1,14 @@
 
 const gCanvasColor = '#ffffff'
 const STORAGE_KEY = 'memesDB'
-var gSavedMemes = []
 
-// var gElInputLine = document.querySelector('.line-input input').value
 
 var gImgs = [
-    { id: 1, url: 'img/meme-imgs(square)/1.jpg', keywords: ['funny', 'cat'] },
+    { id: 1, url: 'img/meme-imgs(square)/1.jpg', keywords: ['angry', 'cat'] },
     { id: 2, url: 'img/meme-imgs(square)/2.jpg', keywords: ['funny', 'cat'] },
     { id: 3, url: 'img/meme-imgs(square)/3.jpg', keywords: ['funny', 'cat'] },
     { id: 4, url: 'img/meme-imgs(square)/4.jpg', keywords: ['funny', 'cat'] },
-    { id: 5, url: 'img/meme-imgs(square)/5.jpg', keywords: ['funny', 'cat'] },
+    { id: 5, url: 'img/meme-imgs(square)/5.jpg', keywords: ['angry', 'cat'] },
     { id: 6, url: 'img/meme-imgs(square)/6.jpg', keywords: ['funny', 'cat'] },
     { id: 7, url: 'img/meme-imgs(square)/7.jpg', keywords: ['funny', 'cat'] },
     { id: 8, url: 'img/meme-imgs(square)/8.jpg', keywords: ['funny', 'cat'] },
@@ -26,55 +24,30 @@ var gImgs = [
     { id: 18, url: 'img/meme-imgs(square)/18.jpg', keywords: ['funny', 'cat'] }
 ]
 
-
-var gMeme = {
-    selectedImgId: 2,
-    selectedLineIdx: 0,
-    lines: [
-        {
-            txt: '',
-            size: 30,
-            align: 'center',
-            color: 'blue',
-            font: 'impact',
-            stroke: 'red',
-            linePosX: 175,
-            linePosY: 30
-        }
-    ]
+function createNewMeme() {
+    return  {
+        id: getNextIdentifier(),
+        selectedImgId: 0,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt: '',
+                size: 30,
+                align: 'center',
+                color: 'blue',
+                font: 'impact',
+                stroke: 'red',
+                linePosX: 175,
+                linePosY: 30
+            }
+        ]
+    }
 }
+
+var gMeme
 
 function getMeme() {
-    const { lines } = gMeme
-    var meme = {
-        img: gImgs[gMeme.selectedImgId - 1].url,
-        lineIdx: gMeme.selectedLineIdx,
-        txt: lines[gMeme.selectedLineIdx].txt,
-        size: lines[gMeme.selectedLineIdx].size,
-        align: lines[gMeme.selectedLineIdx].align,
-        color: lines[gMeme.selectedLineIdx].color,
-        font: lines[gMeme.selectedLineIdx].font,
-        stroke: lines[gMeme.selectedLineIdx].stroke,
-        linePosX: lines[gMeme.selectedLineIdx].linePosX,
-        linePosY: lines[gMeme.selectedLineIdx].linePosY
-    }
-    return meme
-}
-
-function cleargMeme() {
-        gMeme.selectedImgId = 2
-        gMeme.selectedLineIdx = 0
-    for (let i = 0; i < gMeme.lines.length; i++) {
-        gMeme.selectedLineIdx = i
-        gMeme.lines[i].txt= ''
-        gMeme.lines[i].size = 30
-        gMeme.lines[i].align = 'center'
-        gMeme.lines[i].color = 'blue'
-        gMeme.lines[i].font = 'impact'
-        gMeme.lines[i].stroke = 'red'
-        gMeme.lines[i].linePosX = '175'
-        gMeme.lines[i].linePosY = '30'
-    }
+    return gMeme
 }
 
 function setLineTxt(memeLineTxt) {
@@ -82,13 +55,19 @@ function setLineTxt(memeLineTxt) {
     lines[gMeme.selectedLineIdx].txt = memeLineTxt
 }
 
-function setImg(imgId) {
-    gMeme.selectedImgId = imgId
+function showEditor() {
     var elGallery = document.querySelector('.gallery-container')
     elGallery.style.display = "none"
     var elMemeEditor = document.querySelector('.meme-editor-container')
     elMemeEditor.classList.remove('hide')
-    renderMeme()
+}
+
+function setImg(imgId) {
+    gMeme = createNewMeme()
+    gMeme.selectedImgId = imgId
+    showEditor()
+    addListeners()
+    renderMeme(getMeme(), gElCanvas)
 }
 
 function setFontColor(txtColor) {
@@ -117,22 +96,22 @@ function downloadMeme(elLink) {
     elLink.download = 'my-meme'
 }
 
-function moveLine(y) {
+function moveLine(x, y) {
     const { lines } = gMeme
-    // console.log('x, y:', x, y);
-
-    // if (!x) {
+    
+    if (!x) {
     lines[gMeme.selectedLineIdx].linePosY += y
-    // x = lines[gMeme.selectedLineIdx].linePosX
-    // }
-    // if (!y) {
-    // lines[gMeme.selectedLineIdx].linePosX += x
-    // y = lines[gMeme.selectedLineIdx].linePosY
-    // }
+    x = lines[gMeme.selectedLineIdx].linePosX
+    }
+
+    if (!y) {
+    lines[gMeme.selectedLineIdx].linePosX += x
+    y = lines[gMeme.selectedLineIdx].linePosY
+    }
 }
 
 function addLine() {
-    if (document.querySelector('.line-input input').value === '') return
+    if (!elLineInput.value) return
     const newLine = {
         txt: '',
         size: 30,
@@ -145,13 +124,13 @@ function addLine() {
     }
     gMeme.selectedLineIdx = gMeme.lines.length
     gMeme.lines.push(newLine)
-    document.querySelector('.line-input input').value = ''
+    elLineInput.value = ''
 }
 
 function removeLine() {
     const { lines } = gMeme
     if (gMeme.lines.length === 1) {
-        document.querySelector('.line-input input').value = ''
+        elLineInput.value = ''
         lines[gMeme.selectedLineIdx].txt = ''
         return
     }
@@ -162,17 +141,16 @@ function removeLine() {
 var switchLineDirection = 'down'
 
 function switchLine() {
-    var curLineTxt = gMeme.lines[gMeme.selectedLineIdx].txt
     if (gMeme.lines.length < 2) return
 
     if (gMeme.selectedLineIdx > 0 && switchLineDirection === 'down') {
         gMeme.selectedLineIdx--
-        document.querySelector('.line-input input').value = curLineTxt
+        elLineInput.value = gMeme.lines[gMeme.selectedLineIdx].txt
 
     } else if (gMeme.selectedLineIdx === 0 || switchLineDirection === 'up') {
         switchLineDirection = 'up'
         gMeme.selectedLineIdx++
-        document.querySelector('.line-input input').value = curLineTxt
+        elLineInput.value = gMeme.lines[gMeme.selectedLineIdx].txt
 
         if (gMeme.selectedLineIdx === gMeme.lines.length - 1) {
             switchLineDirection = 'down'
@@ -180,11 +158,34 @@ function switchLine() {
     }
 }
 
-
-function _saveToStorage() {
-    saveToStorage(STORAGE_KEY, gSavedMemes)
+function _saveToStorage(meme) {
+    var savedMemes = loadFromStorage(STORAGE_KEY, true) || {}
+    savedMemes[meme.id] = meme
+    saveToStorage(STORAGE_KEY, savedMemes, true)
 }
 
 function _loadFromStorage() {
-    loadFromStorage(STORAGE_KEY)
+    loadFromStorage(STORAGE_KEY, true)
+}
+
+function getRandMeme() {
+    addListeners()
+    gMeme = createNewMeme()
+
+    var randNumTxtLines = getRandomIntInclusive(1, 2)
+    gMeme.selectedImgId = getRandomIntInclusive(1, 18)
+    gMeme.lines = []
+    for (var i=0; i<randNumTxtLines; i++) {
+        const newLine = {
+            txt: makeLorem(5),
+            size: getRandomIntInclusive(15, 35),
+            align: 'center',
+            color: getRandomColor(),
+            font: 'impact',
+            stroke: getRandomColor(),
+            linePosX: 175,
+            linePosY: i == 0 ? 30 : 320 
+        }
+        gMeme.lines.push(newLine)
+    }
 }
