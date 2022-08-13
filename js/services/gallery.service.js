@@ -1,7 +1,6 @@
 
 var gSearchBy
 
-
 function showGallery() {
     var elGallery = document.querySelector('.gallery-container')
     elGallery.style.display = "block"
@@ -16,10 +15,11 @@ function setSearch(searchStr) {
 }
 
 function getImgsForDisplay() {
-
     if (!gSearchBy) return gImgs
 
+    gSearchBy = gSearchBy.toLowerCase()
+
     return gImgs.filter(img => {
-        return img.keywords.some(keyword => keyword.startsWith(gSearchBy))
+        return img.keywords.some(keyword => keyword.toLowerCase().startsWith(gSearchBy))
     })
 }

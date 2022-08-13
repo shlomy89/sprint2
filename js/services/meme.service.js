@@ -4,24 +4,24 @@ const STORAGE_KEY = 'memesDB'
 
 
 var gImgs = [
-    { id: 1, url: 'img/meme-imgs(square)/1.jpg', keywords: ['angry', 'cat'] },
-    { id: 2, url: 'img/meme-imgs(square)/2.jpg', keywords: ['funny', 'cat'] },
-    { id: 3, url: 'img/meme-imgs(square)/3.jpg', keywords: ['funny', 'cat'] },
-    { id: 4, url: 'img/meme-imgs(square)/4.jpg', keywords: ['funny', 'cat'] },
-    { id: 5, url: 'img/meme-imgs(square)/5.jpg', keywords: ['angry', 'cat'] },
-    { id: 6, url: 'img/meme-imgs(square)/6.jpg', keywords: ['funny', 'cat'] },
-    { id: 7, url: 'img/meme-imgs(square)/7.jpg', keywords: ['funny', 'cat'] },
-    { id: 8, url: 'img/meme-imgs(square)/8.jpg', keywords: ['funny', 'cat'] },
-    { id: 9, url: 'img/meme-imgs(square)/9.jpg', keywords: ['funny', 'cat'] },
-    { id: 10, url: 'img/meme-imgs(square)/10.jpg', keywords: ['funny', 'cat'] },
-    { id: 11, url: 'img/meme-imgs(square)/11.jpg', keywords: ['funny', 'cat'] },
-    { id: 12, url: 'img/meme-imgs(square)/12.jpg', keywords: ['funny', 'cat'] },
-    { id: 13, url: 'img/meme-imgs(square)/13.jpg', keywords: ['funny', 'cat'] },
-    { id: 14, url: 'img/meme-imgs(square)/14.jpg', keywords: ['funny', 'cat'] },
-    { id: 15, url: 'img/meme-imgs(square)/15.jpg', keywords: ['funny', 'cat'] },
-    { id: 16, url: 'img/meme-imgs(square)/16.jpg', keywords: ['funny', 'cat'] },
-    { id: 17, url: 'img/meme-imgs(square)/17.jpg', keywords: ['funny', 'cat'] },
-    { id: 18, url: 'img/meme-imgs(square)/18.jpg', keywords: ['funny', 'cat'] }
+    { id: 1, url: 'img/meme-imgs(square)/1.jpg', keywords: ['trump', 'usa', 'angry', 'president'] },
+    { id: 2, url: 'img/meme-imgs(square)/2.jpg', keywords: ['dogs', 'animals', 'cute'] },
+    { id: 3, url: 'img/meme-imgs(square)/3.jpg', keywords: ['baby', 'dog', 'cute'] },
+    { id: 4, url: 'img/meme-imgs(square)/4.jpg', keywords: ['cat', 'animal'] },
+    { id: 5, url: 'img/meme-imgs(square)/5.jpg', keywords: ['success', 'yes', 'baby', 'victory'] },
+    { id: 6, url: 'img/meme-imgs(square)/6.jpg', keywords: ['awesomeness', 'history'] },
+    { id: 7, url: 'img/meme-imgs(square)/7.jpg', keywords: ['baby', 'surprise'] },
+    { id: 8, url: 'img/meme-imgs(square)/8.jpg', keywords: ['clown', 'strange outfit', 'hat'] },
+    { id: 9, url: 'img/meme-imgs(square)/9.jpg', keywords: ['haha', 'funny', 'bastard'] },
+    { id: 10, url: 'img/meme-imgs(square)/10.jpg', keywords: ['obama', 'president', 'usa', 'white teeth'] },
+    { id: 11, url: 'img/meme-imgs(square)/11.jpg', keywords: ['gays', 'kiss', 'basketball'] },
+    { id: 12, url: 'img/meme-imgs(square)/12.jpg', keywords: ['blame'] },
+    { id: 13, url: 'img/meme-imgs(square)/13.jpg', keywords: ['Leonardo DiCaprio', 'actor', 'holywood'] },
+    { id: 14, url: 'img/meme-imgs(square)/14.jpg', keywords: ['glasses', 'matrix', 'morpheus', 'movie'] },
+    { id: 15, url: 'img/meme-imgs(square)/15.jpg', keywords: ['actor', 'movie'] },
+    { id: 16, url: 'img/meme-imgs(square)/16.jpg', keywords: ['star track', 'movie', 'hollywood'] },
+    { id: 17, url: 'img/meme-imgs(square)/17.jpg', keywords: ['putin', 'president', 'russia', 'dictator'] },
+    { id: 18, url: 'img/meme-imgs(square)/18.jpg', keywords: ['toy story', 'movie', 'hollywood'] }
 ]
 
 function createNewMeme() {

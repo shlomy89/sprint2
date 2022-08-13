@@ -178,22 +178,6 @@ a.download-btn {
 
 /* ------------------------------------ / ----------------------------------- */
 
-.main-nav-list:first-child:hover .dropdowm-menu {
-    display: flex;
-}
-
-.dropdowm-menu li a {
-    border-bottom: 1px solid #1d1d1d;
-}
-.dropdowm-menu {
-    display: none;
-    position: fixed;
-    left: 0;
-    background-color: var(--color1);
-    width: 100%;
-    top: 8rem;
-}
-
 .modal-wrapper {
     display: none;
     position: absolute;
