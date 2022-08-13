@@ -93,3 +93,7 @@ function onRemoveLine() {
 function onSwitchLine() {
     switchLine()
 }
+
+function onCloseModal() {
+    document.querySelector('.modal-wrapper').style.display = 'none'
+}
