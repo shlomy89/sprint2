@@ -51,7 +51,7 @@ body {
     border-radius: 10px;
 }
 
-.gallery-grid img:hover, .gallery-grid img:active {
+.gallery-grid img:hover, .gallery-grid img:active, .gallery-grid canvas:hover, .gallery-grid canvas:active {
     box-shadow: 0px 0px 9px 3px rgb(255, 255, 255, 0.3);
     cursor: pointer;
 }
@@ -95,4 +95,5 @@ body {
     background-color: #1e7cd3;
     box-shadow: 0px -6px 0px #54b2e8, 0px 6px 0px #165c9c;
     margin-left: 1em;
+    cursor: pointer;
 }

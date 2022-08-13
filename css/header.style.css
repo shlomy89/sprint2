@@ -27,10 +27,14 @@
     border: none;
 }
 
+.header-btn button:last-child {
+    margin-right: 1em;
+}
+
 .header-btn button:hover {
     box-shadow: 3px 4px 0px 0px #899599;
     background-color: #fefefe;
-    border-radius: 30px;
+    border-radius: 15px;
     cursor: pointer;
     color: #21ac91;
     font-family: sans-serif;

@@ -8,7 +8,6 @@
 }
 
 .meme-canvas {
-
     width: 90%;
     height: 90%;
     display: block;
@@ -37,7 +36,6 @@
     text-shadow: 0px 0px 4px #000;
     padding: 0;
     vertical-align: middle;
-
     border: 1px solid #fff;
     border-radius: 5px;
     height: 50px;
@@ -56,10 +54,6 @@
 .editor-btn:active {
     border-style: inset;
     border: 2px solid #fff;
-}
-
-.editor-btn span {
-
 }
 
 .editor-btn img {
@@ -112,41 +106,34 @@
     text-align: center;
 }
 
-.share .btn {
+.share .action-btn {
     border: 0;
     border-radius: 10px;
     color: #ffffff;
     display: inline-block;
     font-size: 20px;
     text-align: center;
-    font-weight: normal;
     height: 40px;
     width: 150px;
-
     background-color: #1e7cd3;
     box-shadow: 0px -6px 0px #54b2e8, 0px 6px 0px #165c9c;
-
     cursor: pointer;
 }
 
-.share .btn:not(:last-child) {
+.share .action-btn:not(:last-child) {
     margin-right: 1em;
 }
 
-.share .btn:hover, .share .btn:active {
-    box-shadow: 0px 6px 0px #165c9c, 0px -6px 0px #54b2e8;
+.share .action-btn:hover, .share .action-btn:active {
+    box-shadow: 0px 6px 0px #165c9c, 0px -6px 0px #54b2e8 !important;
 }
 
-.share-btn {
-    margin-right: 1em;
-}
-
-.download-btn {
-    background-color: #8f44bb !important;
+.action-btn.download-btn {
+    background-color: #8f44bb;
     box-shadow: 0px -6px 0px #bf84da, 0px 6px 0px #632687 !important;
 }
 
-.download-btn:hover, .download-btn:active  {
+.share .action-btn.download-btn:hover, .share .action-btn.download-btn:active  {
     box-shadow: 0px 6px 0px #632687, 0px -6px 0px #bf84da;
 }
 
@@ -157,24 +144,15 @@ a.download-btn {
 
 .line-input input {
     padding: 10px;
-    font-size: 25px;
+    font-size: 20px;
     border-width: 1px;
     border-color: #cccccc;
     background-color: #f0eaea;
     color: rgba(35, 34, 34, 0.903);
     border-style: hidden;
     border-radius: 15px;
-    box-shadow: 0px 0px 15px rgb(9, 224, 9);
+    box-shadow: 0px 0px 7px rgb(9, 224, 9);
 }
-
-.line-edit .editor-btn {
-    margin-inline-end: 13px;
-}
-
-.remove-line {
-    margin-inline-end: 0 !important;
-}
-
 
 /* ------------------------------------ / ----------------------------------- */
 
