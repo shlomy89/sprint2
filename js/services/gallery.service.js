@@ -6,6 +6,7 @@ function showGallery() {
     elGallery.style.display = "block"
     var elMemeEditor = document.querySelector('.meme-editor-container')
     elMemeEditor.classList.add('hide')
+    document.querySelector('.modal-wrapper').style.display = 'none'
 
     document.querySelector('.line-input input').value = ''
 }

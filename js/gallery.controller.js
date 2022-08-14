@@ -1,12 +1,13 @@
 
 var gElCanvas
 var gCtx
+var gCurrentIdentifier = 0
 
 const MEME_IDENTIFIER = "meme_identifier"
-var gCurrentIdentifier = 0
 const elLineInput = document.querySelector('.line-input input')
 const elGallery = document.querySelector('.gallery-container')
 const elMemeEditor = document.querySelector('.meme-editor-container')
+
 
 function onInit() {
     gCurrentIdentifier = loadFromStorage(MEME_IDENTIFIER, false) || 0
@@ -25,7 +26,7 @@ function getNextIdentifier() {
 function renderGallery(source) {
     const imgs = getImgsForDisplay()
     const elGalleryGrid = document.querySelector('.gallery-grid')
-
+    // Render main gallery
     if (source === 'gallery') {
         let strHTML = ''
 
@@ -38,36 +39,48 @@ function renderGallery(source) {
         elGalleryGrid.innerHTML = strHTML.join('')
 
     } else {
-
-        const savedMemes = loadFromStorage(STORAGE_KEY, true) || {}
+        //Rendering saved meme gallery
+        const savedMemes = loadFromStorage(STORAGE_KEY, true)
         const elGalleryGrid = document.querySelector('.gallery-grid')
         elGalleryGrid.innerHTML = ''
 
-        for (let id in savedMemes) {
-            let savedMeme = savedMemes[id]
+        if (!savedMemes) {
+            const elUserMessage = document.createElement('div')
+            elUserMessage.className = "no-memes-to-show"
 
-            var elWrappingDiv = document.createElement('div')
-            elWrappingDiv.className = "img img1"
+            const elMessageContent = document.createElement('h2')
+            elMessageContent.className = "message-content"
+            elMessageContent.innerText = "There's no saved memes to show"
 
-            var elCanvas = document.createElement('canvas')
-            elCanvas.onclick = function () {
-                onSavedMemeSelect(id)
+            elUserMessage.appendChild(elMessageContent)
+            elGalleryGrid.appendChild(elUserMessage)
+
+        } else {
+
+            for (let id in savedMemes) {
+                let savedMeme = savedMemes[id]
+
+                var elWrappingDiv = document.createElement('div')
+                elWrappingDiv.className = "img img1"
+
+                var elCanvas = document.createElement('canvas')
+                elCanvas.onclick = function () {
+                    onSavedMemeSelect(id)
+                }
+                elCanvas.className = "meme-canvas"
+                elCanvas.height = 350
+                elCanvas.width = 350
+
+                renderMeme(savedMeme, elCanvas)
+
+                elWrappingDiv.appendChild(elCanvas)
+                elGalleryGrid.appendChild(elWrappingDiv)
             }
-            elCanvas.className = "meme-canvas"
-            elCanvas.height = 350
-            elCanvas.width = 350
-
-            renderMeme(savedMeme, elCanvas)
-
-            elWrappingDiv.appendChild(elCanvas)
-
-            elGalleryGrid.appendChild(elWrappingDiv)
         }
     }
 }
 
 function onImgSelect(imgId) {
-    gMeme = createNewMeme()
     setImg(imgId)
 }
 
@@ -100,4 +113,8 @@ function onSavedMemeSelect(id) {
     renderMeme(meme, gElCanvas)
     elLineInput.value = gMeme.lines[gMeme.selectedLineIdx].txt
     showEditor()
+}
+
+function onToggleMenu() {
+    document.querySelector('.header-btn').classList.toggle('menu-opened')
 }

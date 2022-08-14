@@ -6,40 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
-    <link rel="stylesheet" href="fontAwesom/css/all.css">
     <link rel="stylesheet" href="css/header.style.css">
-    <link rel="stylesheet" href="css/gallery.style.css">
-    <link rel="stylesheet" href="css/meme.style.css">
+    <link rel="icon" href="img/tab.logo.png">
 
     <script src="fontAwesom/js/all.js"></script>
 </head>
 
 <body onload="onInit()">
 
+    <header class="main-header">
+
+        <nav class="main-nav-list flex clean-list align-center">
+
+            <div class="header-logo">
+                <span><img src="img/header.logo.png">eme<p>Generator</p></span>
+            </div>
+
+            <div class="header-btn flex">
+
+                <div class="btn gallery-btn">
+                    <button onclick="onShowGallery('gallery')">Gallery</button>
+                </div>
+
+                <div class="btn memes-btn">
+                    <button onclick="onShowGallery('memes')">Memes</button>
+                </div>
+
+                <!-- <div class="toggle-menu"> -->
+                    <!-- <button class="toggle-menu-btn" onclick="onToggleMenu()">☰</button> -->
+                <!-- </div> -->
+
+            </div>
+        </nav>
+
+    </header>
+
     <main class="main-content">
 
-        <header class="main-header">
-            
-            <nav class="main-nav-list flex clean-list align-center">
-
-                <div class="header-logo flex">
-                    <i class="fa-solid fa-square-parking"></i>&nbsp;PiGenerator
-                </div>
-
-                <div class="header-btn flex">
-
-                    <div class="btn gallery-btn">
-                        <button onclick="onShowGallery('gallery')">Gallery</button>
-                    </div>
-
-                    <div class="btn memes-btn">
-                        <button onclick="onShowGallery('memes')">Memes</button>
-                    </div>
-
-                </div>
-            </nav>
-
-        </header>
 
         <section class="gallery-container flex align-center">
 
@@ -53,7 +56,7 @@
             </div>
         </section>
 
-        <section class="meme-editor-container hide grid">
+        <section class="meme-editor-container hide grid  justify-items">
 
             <canvas class="meme-canvas" height="350" width="350">
                 <!-- Populated from JS -->
@@ -76,7 +79,7 @@
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </div>
-                
+
                 <div class="line-edit flex">
                     <button class="editor-btn" onclick="onMoveLine(0, -15)">
                         <i class="fa-solid fa-arrow-up"></i>
@@ -87,7 +90,7 @@
                     <button class="editor-btn" onclick="onMoveLine(-15, 0)">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
-                    <button class="editor-btn" onclick="onMoveLine(15, 0)">
+                    <button class="editor-btn move-line-right" onclick="onMoveLine(15, 0)">
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
@@ -96,10 +99,13 @@
                 <div class="txt-edit-btn grid">
                     <button class="editor-btn increase-font" onclick="onChangeTxtSize(3)"><span>A+</span></button>
                     <button class="editor-btn decrease-font" onclick="onChangeTxtSize(-3)"><span>A-</span></button>
-                    <button class="editor-btn align-left" onclick="onChangeAlign('left')"><i class="fa-solid fa-align-left"></i></button>
-                    <button class="editor-btn align-center" onclick="onChangeAlign('center')"><i class="fa-solid fa-align-center"></i></button>
-                    <button class="editor-btn align-right" onclick="onChangeAlign('right')"><i class="fa-solid fa-align-right"></i></button>
-                    
+                    <button class="editor-btn align-left" onclick="onChangeAlign('left')"><i
+                            class="fa-solid fa-align-left"></i></button>
+                    <button class="editor-btn align-center" onclick="onChangeAlign('center')"><i
+                            class="fa-solid fa-align-center"></i></button>
+                    <button class="editor-btn align-right" onclick="onChangeAlign('right')"><i
+                            class="fa-solid fa-align-right"></i></button>
+
                     <select class="select-font" oninput="onSetTxtFont(this.value)">
                         <option>IMPACT</option>
                         <option>SERIF</option>
@@ -120,15 +126,16 @@
 
             </section>
 
+            <div class="modal-wrapper">
+                <div class="modal">
+                    <i class="fa fa-close" onclick="onCloseModal()"></i>
+                    <div class="user-message"></div>
+                    <div class="share-button"></div>
+                </div>
+            </div>
+
         </section>
 
-        <div class="modal-wrapper">
-            <div class="modal">
-                <i class="fa fa-close" onclick="onCloseModal()"></i>
-                <div class="user-message"></div>
-                <div class="share-button"></div>
-            </div>
-        </div>
 
     </main>
 
@@ -142,4 +149,5 @@
     <script src="js/meme.controller.js"></script>
 
 </body>
+
 </html>

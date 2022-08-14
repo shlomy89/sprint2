@@ -1,3 +1,4 @@
+
 function saveToStorage(key, val, isJSON) {
     if (isJSON) {
         val = JSON.stringify(val)    

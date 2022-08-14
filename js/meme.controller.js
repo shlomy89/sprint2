@@ -6,7 +6,6 @@ function renderCanvas() {
 
 function renderMeme(meme, elCanvas) {
     let ctx = elCanvas.getContext('2d')
-    // ctx.globalCompositeOperation = 'source-over'
 
     //render img
     var img = new Image()

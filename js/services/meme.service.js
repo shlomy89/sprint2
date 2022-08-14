@@ -1,4 +1,5 @@
 
+var gMeme
 const gCanvasColor = '#ffffff'
 const STORAGE_KEY = 'memesDB'
 
@@ -44,7 +45,6 @@ function createNewMeme() {
     }
 }
 
-var gMeme
 
 function getMeme() {
     return gMeme
@@ -150,7 +150,7 @@ function addLine() {
 }
 
 function removeLine() {
-    const { lines } = gMeme
+    const { lines } = getMeme()
     if (gMeme.lines.length === 1) {
         elLineInput.value = ''
         lines[gMeme.selectedLineIdx].txt = ''
