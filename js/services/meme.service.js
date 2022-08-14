@@ -25,7 +25,7 @@ var gImgs = [
 ]
 
 function createNewMeme() {
-    return  {
+    return {
         id: getNextIdentifier(),
         selectedImgId: 0,
         selectedLineIdx: 0,
@@ -48,6 +48,28 @@ var gMeme
 
 function getMeme() {
     return gMeme
+}
+
+function getRandMeme() {
+    addListeners()
+    gMeme = createNewMeme()
+
+    var randNumTxtLines = getRandomIntInclusive(1, 2)
+    gMeme.selectedImgId = getRandomIntInclusive(1, 18)
+    gMeme.lines = []
+    for (var i = 0; i < randNumTxtLines; i++) {
+        const newLine = {
+            txt: makeLorem(5),
+            size: getRandomIntInclusive(15, 35),
+            align: 'center',
+            color: getRandomColor(),
+            font: 'impact',
+            stroke: getRandomColor(),
+            linePosX: 175,
+            linePosY: i == 0 ? 30 : 320
+        }
+        gMeme.lines.push(newLine)
+    }
 }
 
 function setLineTxt(memeLineTxt) {
@@ -98,15 +120,15 @@ function downloadMeme(elLink) {
 
 function moveLine(x, y) {
     const { lines } = gMeme
-    
+
     if (!x) {
-    lines[gMeme.selectedLineIdx].linePosY += y
-    x = lines[gMeme.selectedLineIdx].linePosX
+        lines[gMeme.selectedLineIdx].linePosY += y
+        x = lines[gMeme.selectedLineIdx].linePosX
     }
 
     if (!y) {
-    lines[gMeme.selectedLineIdx].linePosX += x
-    y = lines[gMeme.selectedLineIdx].linePosY
+        lines[gMeme.selectedLineIdx].linePosX += x
+        y = lines[gMeme.selectedLineIdx].linePosY
     }
 }
 
@@ -158,6 +180,12 @@ function switchLine() {
     }
 }
 
+function saveMeme() {
+    document.querySelector('.user-message').innerHTML = `<span>Your Meme successfully saved</span>`
+    document.querySelector('.share-button').innerHTML = `<button onclick="onShowGallery('memes')" class="action-btn save-meme">Get your saved Meme</button> `
+    document.querySelector('.modal-wrapper').style.display = 'block'
+}
+
 function _saveToStorage(meme) {
     var savedMemes = loadFromStorage(STORAGE_KEY, true) || {}
     savedMemes[meme.id] = meme
@@ -166,26 +194,4 @@ function _saveToStorage(meme) {
 
 function _loadFromStorage() {
     loadFromStorage(STORAGE_KEY, true)
-}
-
-function getRandMeme() {
-    addListeners()
-    gMeme = createNewMeme()
-
-    var randNumTxtLines = getRandomIntInclusive(1, 2)
-    gMeme.selectedImgId = getRandomIntInclusive(1, 18)
-    gMeme.lines = []
-    for (var i=0; i<randNumTxtLines; i++) {
-        const newLine = {
-            txt: makeLorem(5),
-            size: getRandomIntInclusive(15, 35),
-            align: 'center',
-            color: getRandomColor(),
-            font: 'impact',
-            stroke: getRandomColor(),
-            linePosX: 175,
-            linePosY: i == 0 ? 30 : 320 
-        }
-        gMeme.lines.push(newLine)
-    }
 }

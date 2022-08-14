@@ -50,7 +50,7 @@ function renderGallery(source) {
             elWrappingDiv.className = "img img1"
 
             var elCanvas = document.createElement('canvas')
-            elCanvas.onclick = function() {
+            elCanvas.onclick = function () {
                 onSavedMemeSelect(id)
             }
             elCanvas.className = "meme-canvas"
@@ -89,6 +89,7 @@ function onGetRandMeme() {
 }
 
 function onSaveMeme() {
+    saveMeme()
     _saveToStorage(gMeme)
 }
 
